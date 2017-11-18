@@ -64,7 +64,8 @@ void MyClass::republishVelocity(geometry_msgs::Twist vel_msg_to_publish) {
 /**
  * Construct a vector of points. The 0th index starts from negative angles (right side of robot)
  * @param laser_msg
- * @return
+ * @return a vector of points in x y coordinates , where all points are in the valid
+ * range of the laser scanner
  */
 std::vector<Point> MyClass::createPoints(sensor_msgs::LaserScan laser_msg) {
 
@@ -101,7 +102,7 @@ std::vector<Point> MyClass::createPoints(sensor_msgs::LaserScan laser_msg) {
  * Find the largest gap and return a new point that represents the center
  * @param laser_msg
  * @param points vector of points must have size >= 2
- * @return
+ * @return a point that represents the center of the largest gap
  */
 Point MyClass::largestGap(std::vector<Point> points){
 
@@ -121,6 +122,12 @@ Point MyClass::largestGap(std::vector<Point> points){
     return centerPoint;
 }
 
+/**
+ *
+ * @param p1
+ * @param p2
+ * @return the distance between the two points
+ */
 float MyClass::getDist(Point p1, Point p2){
     float x1 = p1.x;
     float y1 = p1.y;
